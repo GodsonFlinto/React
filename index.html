@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <div id="react-root"></div>
+
+<!-- Using vanilla JS (imperative) to manually create and append a DOM element.
+
+Using React (declarative) to describe what the UI should look like and letting React handle rendering.(by using babel for converting the jsx file into javascript that one written inside the script ) -->
+    
+    <!-- Imperative Programing -->
+    <script type="text/javascript">
+        let root = document.getElementById('root')
+        let head = document.createElement('h1')
+        head.innerHTML = "I am Godson"
+        root.appendChild(head)
+    </script>
+
+    <!-- Declarative Programming -->
+    <script type="text/babel">
+        let reactroot = document.getElementById('react-root')
+        let root1 = ReactDOM.createRoot(reactroot)
+        root1.render( <h1>Project Setup</h1>)
+    </script>
+</body>
+</html>
