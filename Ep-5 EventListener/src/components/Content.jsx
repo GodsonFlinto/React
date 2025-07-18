@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Counter from './Counter'
 
 //styled using styled-compomnent library
     let Button = styled.button
@@ -40,6 +41,7 @@ export const Content = () => {
             Because print1("Godson") would execute immediately during render.
             Wrapping it inside an anonymous arrow function () => print1("Godson") ensures it runs only when clicked. */}
         <NewButton onClick={()=>{print1("Godson")}}>Duplicate</NewButton>
+        <Counter/>
     </main>
   )
 }
