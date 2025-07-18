@@ -11,7 +11,7 @@ const Shop = () => {
     <>
       <div>
         <h1>Welcome to our Shop!</h1>
-        <Product product = {product}/>
+        <Product product={product} />
       </div>
     </>
   );
