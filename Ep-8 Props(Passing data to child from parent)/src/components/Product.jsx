@@ -1,3 +1,5 @@
+import GrandProduct from "./grandProduct";
+
 function Product({product}){  //destructuring it in the parameter itself
     //let {product} = props  //destructing
     console.log(product)
@@ -10,6 +12,7 @@ function Product({product}){  //destructuring it in the parameter itself
                     <p> { product.price }</p>
                     <p> { product.desc } </p>
                 </section>
+                <GrandProduct deepName = {product.name} deepPrice = {product.price} deepDesc = {product.desc} />
             </div>
         </>
     )
