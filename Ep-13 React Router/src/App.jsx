@@ -8,6 +8,7 @@ import Content from "./Components/Todo";
 import Product from "./Components/Product";
 import ProductItem from "./Components/ProductItem";
 import ProductList from "./Components/ProductList";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 
 function App() {
   const [count, setCount] = useState(0);
@@ -17,12 +18,14 @@ function App() {
   return (
     <>
       <Router>
-        <Link to="/">Home</Link>
-        <Link to={`/login/${user}`}>Login</Link>
-        <Link to="/signup">Signup</Link>
-        <Link to="/product" >Products</Link>
-        <Link to="/todo">ToDo</Link>
-
+        <ol>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to={`/login/${user}`}>Login</Link></li>
+        <li><Link to="/signup">Signup</Link></li>
+        <li><Link to="/product" >Products</Link></li>
+        <li><Link to="/todo">ToDo</Link></li>
+        </ol>
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login/:name" element={<Login />} />  
