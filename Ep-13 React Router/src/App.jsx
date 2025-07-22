@@ -9,6 +9,7 @@ import Product from "./Components/Product";
 import ProductItem from "./Components/ProductItem";
 import ProductList from "./Components/ProductList";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import NavBar from "./Components/Navbar";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -25,7 +26,7 @@ function App() {
         <li><Link to="/product" >Products</Link></li>
         <li><Link to="/todo">ToDo</Link></li>
         </ol>
-        
+        <NavBar/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login/:name" element={<Login />} />  
