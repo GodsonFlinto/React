@@ -8,7 +8,7 @@ import { Link, useParams } from 'react-router-dom';
 
 function NavBar() {
     let name = "Godson";
-    console.log(name)
+    //console.log(name)
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
