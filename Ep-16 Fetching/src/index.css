@@ -16,3 +16,10 @@
   flex-grow: 1;
 }
 
+div .button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  gap : 10px;
+}

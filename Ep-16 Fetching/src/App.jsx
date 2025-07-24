@@ -12,6 +12,7 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
 import NavBar from "./Components/NavBar";
 import NotFound from "./Components/NotFound";
 import NewProduct from "./Components/NewProduct";
+import UpdateProduct from "./Components/UpdateProduct";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -32,6 +33,7 @@ function App() {
             <Route path="list" element={<ProductList/>} />
           </Route>
           <Route path="/newproduct" element={<NewProduct/>}/>
+          <Route path="/update/:id" element={<UpdateProduct/>}/>
           <Route path="/todo" element={<Content/> }/>
           <Route path="*" element={<NotFound/>}/>
         </Routes>

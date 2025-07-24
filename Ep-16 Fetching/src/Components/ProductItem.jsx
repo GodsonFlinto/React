@@ -3,10 +3,17 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import {FourSquare} from "react-loading-indicators"
+import { FourSquare } from "react-loading-indicators";
 import Usefetch from "./CustomHook/Usefetch";
+import { RiDeleteBinFill } from "react-icons/ri";
+import { MdEditSquare } from "react-icons/md";
+import { FaShoppingCart } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Swal from 'sweetalert2'
 
 const ProductItem = () => {
+  let navigate = useNavigate();
   // let [products, setProduct] = useState([]);
   // let [Error, setError] = useState("");
   // let [loading, setIsLoading] = useState(true);
@@ -32,26 +39,57 @@ const ProductItem = () => {
   //       setIsLoading(false);
   //     });
   // }, []);
-  let {products, Error, loading} = Usefetch("http://localhost:4000/products")
+  let { products, Error, loading, setProduct } = Usefetch("http://localhost:4000/products");
   //console.log(customhook)
+
+  let handledelete = (id) => {
+      axios.delete(`http://localhost:4000/products/${id}`)
+      .then(() => {
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+          }
+        });
+
+        let newProduct = products.filter( (product)=>{return product.id !== id } )
+        setProduct(newProduct)
+    });
+  };
 
   if (loading) {
     return (
       <center>
         <div>
-        <FourSquare
-          color="#ff081a"
-          size="medium"
-          text="Loading..."
-          textColor=""
-        />{" "}
-      </div>
+          <FourSquare
+            color="#ff081a"
+            size="medium"
+            text="Loading..."
+            textColor=""
+          />{" "}
+        </div>
       </center>
-      
     );
   } else {
     return (
       <div>
+        <article>
+          <span>
+            <h2>To create new product </h2>
+            <button onClick={()=>navigate("/newProduct")}>Click me</button>
+          </span>
+      </article>
         <h1>Product List</h1>
         {Error && <h2>{Error}</h2>}
         {products.length !== 0 && (
@@ -82,16 +120,44 @@ const ProductItem = () => {
                   <Card.Footer
                     style={{ justifyContent: "center", alignItems: "center" }}
                   >
-                    <Button
-                      variant="primary"
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      Add to Cart
-                    </Button>
+                    <div className="button">
+                      <Button
+                        variant="primary"
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <FaShoppingCart />
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          navigate(`/update/${product.id}`);
+                        }}
+                        variant="secondary"
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <MdEditSquare />
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          handledelete(product.id);
+                        }}
+                        variant="danger"
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
+                      >
+                        <RiDeleteBinFill />
+                      </Button>
+                    </div>
                   </Card.Footer>
                 </Card>
               );

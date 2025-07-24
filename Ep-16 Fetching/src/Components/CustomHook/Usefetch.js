@@ -31,6 +31,6 @@ function Usefetch(url) {
     fetchapi()
   }, []);
 
-  return {products, Error, loading}
+  return {products, Error, loading, setProduct}
 }
 export default Usefetch;
