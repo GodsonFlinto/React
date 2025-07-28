@@ -11,6 +11,8 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from 'sweetalert2'
+import { useDispatch } from "react-redux";
+import { addItem } from "../store/cartslice";
 
 const ProductItem = () => {
   let navigate = useNavigate();
@@ -67,6 +69,12 @@ const ProductItem = () => {
         setProduct(newProduct)
     });
   };
+
+
+  let dispatch = useDispatch()
+  let addItemtoCart = (product)=>{
+    dispatch(addItem(product))
+  }
 
   if (loading) {
     return (
@@ -128,6 +136,7 @@ const ProductItem = () => {
                           justifyContent: "center",
                           alignItems: "center",
                         }}
+                        onClick={ () => addItemtoCart(product) }
                       >
                         <FaShoppingCart />
                       </Button>
