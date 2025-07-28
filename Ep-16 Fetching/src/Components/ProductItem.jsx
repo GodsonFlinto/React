@@ -11,7 +11,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from 'sweetalert2'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../store/cartslice";
 
 const ProductItem = () => {
@@ -72,8 +72,26 @@ const ProductItem = () => {
 
 
   let dispatch = useDispatch()
+  let cartState = useSelector( (state) =>{return state.cart})
   let addItemtoCart = (product)=>{
-    dispatch(addItem(product))
+    let checkProduct = cartState.some( (cartProduct)=>cartProduct.id === product.id )
+    if( ! checkProduct){
+      dispatch(addItem(product))
+      Swal.fire({
+              title: "Success!",
+              text: "Your product has been added.",
+              icon: "success",
+            });
+    }
+    else{
+      Swal.fire({
+              title: "Oops!",
+              text: "Your product is already in the list.",
+              icon: "error",
+              footer : "Please choose another product"
+            });
+    }
+    
   }
 
   if (loading) {
